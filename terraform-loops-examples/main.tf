@@ -10,19 +10,20 @@ terraform {
 # create aws provider 
 provider "aws" {
   region = "ap-south-1"
-  secret_key = "xxxx"
-  access_key = "xxxx"
+  secret_key = "xxxxxx"
+  access_key = "xxxxxx"
 }
 
 # create a vpc for aws project 
 resource "aws_vpc" "hsitmanagementvpc" {
-  cidr_block = "10.0.0.0/16"
+
+  for_each = var.xyz 
+  count = length(each.key)
+  cidr_block = var.xyz["vpcblocks"]
   instance_tenancy = "default"
-  lifecycle {
-    prevent_destroy =  false
-    }
   tags = {
-    Name = "hsit-manangement-vpc"
+    #Name = tomap(var.testbox)
+    #Name = tostring(var.testbox)
   }
 }
 

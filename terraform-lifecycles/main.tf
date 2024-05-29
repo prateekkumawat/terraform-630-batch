@@ -5,6 +5,11 @@ terraform {
       version = "5.48.0"
     }
   }
+  backend "s3" {
+    bucket = "terraform-hsit-state"
+    key    = "state"
+    region = "ap-south-1"
+  }
 }
 
 provider "aws" {
